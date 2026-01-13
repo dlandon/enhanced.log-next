@@ -3,13 +3,13 @@
 <!ENTITY name       "enhanced.log-next">
 <!ENTITY plugin      "enhanced.log">
 <!ENTITY author     "dlandon">
-<!ENTITY version	"2025.12.27">
+<!ENTITY version	"2026.01.13">
 <!ENTITY launch		"Tools/EnhancedSyslog">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY tgzURL		"https://raw.githubusercontent.com/&author;/&name;/v&version;">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://github.com/dlandon/&name;/discussions">
-<!ENTITY MD5		"cc2ae21c8d7f346e8a98d835a3822914">
+<!ENTITY MD5		"982f53cfef55781211f36541ba50e13f">
 ]>
 
 <PLUGIN	name="&plugin;"
@@ -24,6 +24,9 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Update chack for file activity next.
+
+###2025.12.27
 - Fix: URL reference so the plugin will update.
 
 ###2025.12.03
@@ -34,7 +37,7 @@
 </CHANGES>
 
 <!--
-Copyright 2015-2025 Dan Landon
+Copyright 2015-2026 Dan Landon
 This plugin adds a webGui page to view the system log with highlighted lines.
 You can enable or disable event highlighting and set your own colors for each event.
 You can add your own search string to highlight in the log.
@@ -159,7 +162,7 @@ The 'post-install' script.
 echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
-echo " Copyright 2015-2025, Dan Landon"
+echo " Copyright 2015-2026, Dan Landon"
 echo " Version: &version;"
 echo "-----------------------------------------------------------"
 echo ""
