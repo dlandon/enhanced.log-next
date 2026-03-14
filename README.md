@@ -2,9 +2,11 @@
 
 This plugin adds a log viewer that highlights lines with colors in the log that allows finding log events much easier.
 
+For support, feature requests, and discussions, please use the Discussions tab.
+
 ### Installing Enhanced Log - Next
 
-To install this plugin manually, enter either of the URLs below in the Enter URL field of the Plugins page.  The URL below will either install the latest or a specific version you choose.
+To install this plugin manually, enter either of the URLs below in the **Enter URL** field of the Plugins page.  The URL below will either install the latest or a specific version you choose.
 
 ### Latest version:
 Copy the URL below exactly as shown:
