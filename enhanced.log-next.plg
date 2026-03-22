@@ -3,13 +3,13 @@
 <!ENTITY name       "enhanced.log-next">
 <!ENTITY plugin      "enhanced.log">
 <!ENTITY author     "dlandon">
-<!ENTITY version	"2026.01.13">
+<!ENTITY version	"2026.03.22">
 <!ENTITY launch		"Tools/EnhancedSyslog">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY tgzURL		"https://raw.githubusercontent.com/&author;/&name;/v&version;">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://github.com/dlandon/&name;/discussions">
-<!ENTITY MD5		"982f53cfef55781211f36541ba50e13f">
+<!ENTITY MD5		"196cf180d32512ab3b5a8dc832759766">
 ]>
 
 <PLUGIN	name="&plugin;"
@@ -24,16 +24,19 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Align plugin name with other Next plugins.
+
+###2026.01.13
 - Fix: Update check for enhanced log next.
 
 ###2025.12.27
 - Fix: URL reference so the plugin will update.
 
 ###2025.12.03
-- First release as Enhanced Log (Next).
+- First release as Enhanced Log - Next.
 
 ###2025.12.05
-- Initial release under the new restrictive license.
+- Initial release under the new license.
 </CHANGES>
 
 <!--
@@ -71,7 +74,7 @@ echo ""
 echo " The previous Enhanced Log plugin is installed."
 echo ""
 echo " You must uninstall the Enhanced Log plugin"
-echo " before installing Enhanced Log (Next)."
+echo " before installing Enhanced Log - Next."
 echo ""
 echo "-----------------------------------------------------------"
 echo ""
@@ -98,7 +101,7 @@ mkdir /boot/config/plugins/&plugin; 2>/dev/null
 tar -xf /boot/config/plugins/&plugin;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
 
 # Fix permissions of executable files
-chmod +x /usr/local/emhttp/plugins/&plugin;/scripts/* /usr/local/emhttp/plugins/&plugin;/event/*
+chmod +x /usr/local/emhttp/plugins/&plugin;/scripts/*
 
 # Start rsyslog filtering.
 echo "Enabling Syslog Filter..."
