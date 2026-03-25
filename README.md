@@ -8,11 +8,11 @@ For support, feature requests, and discussions, please use the Discussions tab.
 
 To install this plugin manually, enter either of the URLs below in the **Enter URL** field of the Plugins page.  The URL below will either install the latest or a specific version you choose.
 
-### Latest version:
+## Latest version:
 Copy the URL below exactly as shown:
 https://raw.githubusercontent.com/dlandon/enhanced.log-next/master/enhanced.log-next.plg
 
-### Specific version:
+## Specific version:
 Copy the URL below exactly as shown:
 https://raw.githubusercontent.com/dlandon/enhanced.log-next/vYYYY.MM.DD/enhanced.log-next.plg
 
