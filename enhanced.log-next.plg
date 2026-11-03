@@ -3,13 +3,13 @@
 <!ENTITY name       "enhanced.log-next">
 <!ENTITY plugin      "enhanced.log">
 <!ENTITY author     "dlandon">
-<!ENTITY version	"2026.07.26">
+<!ENTITY version	"2026.11.03">
 <!ENTITY launch		"Tools/EnhancedSyslog">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY tgzURL		"https://raw.githubusercontent.com/&author;/&name;/v&version;">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://github.com/dlandon/&name;/discussions">
-<!ENTITY MD5		"d7af93b11057cb0614d3ed849a3c08a1">
+<!ENTITY MD5		"7a62c69ac154163cea26a900988ec1f0">
 ]>
 
 <PLUGIN	name="&plugin;"
@@ -24,6 +24,12 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Validate the plugin bundle before changing installed files.
+- Fix: Report bundle extraction failures and abort installation.
+- Fix: Improve old bundle cleanup to preserve the exact current installation bundle.
+- Fix: Apply syslog filtering after configuration files are created during installation.
+
+###2026.07.26
 - Fix: Help text does not show properly.
 - Add: 'Today Only' filter to filter log to today's activity only.
 
@@ -90,11 +96,27 @@ echo ""
 exit 1
 fi
 
+#
+# Validate the bundle before changing the installed plugin.
+#
+if ! tar -tf "/boot/config/plugins/&plugin;/&name;-&version;.tgz" >/dev/null 2>&amp;1; then
+	echo "ERROR: &name; bundle is missing or invalid. Installation aborted."
+	exit 1
+fi
+
+#
 # Remove emhttp files so we can re-install.
+#
 rm -rf /usr/local/emhttp/plugins/&plugin;/* 2>/dev/null
 
+#
 # Remove old 'bundle' files.
-rm -f $(ls /boot/config/plugins/&plugin;/&name;*.tgz 2>/dev/null | grep -v '&version;')
+#
+for bundle in /boot/config/plugins/&plugin;/&name;*.tgz; do
+	if [[ -f "$bundle" &amp;&amp; "$bundle" != "/boot/config/plugins/&plugin;/&name;-&version;.tgz" ]]; then
+		rm -f -- "$bundle"
+	fi
+done
 </INLINE>
 </FILE>
 
@@ -103,19 +125,18 @@ Install the plugin bundle.
 -->
 <FILE Run="/bin/bash">
 <INLINE>
-# Create plugin directory
-mkdir /boot/config/plugins/&plugin; 2>/dev/null
-
+#
 # Install the 'bundle'.
-tar -xf /boot/config/plugins/&plugin;/&name;-&version;.tgz -C /usr/local/emhttp/plugins 2>/dev/null
+#
+if ! tar -xf "/boot/config/plugins/&plugin;/&name;-&version;.tgz" -C /usr/local/emhttp/plugins; then
+	echo "ERROR: Unable to extract &name; bundle. Installation aborted."
+	exit 1
+fi
 
+#
 # Fix permissions of executable files
+#
 chmod +x /usr/local/emhttp/plugins/&plugin;/scripts/*
-
-# Start rsyslog filtering.
-echo "Enabling Syslog Filter..."
-logger "Enabling Syslog filter..." -t"enhanced.log"
-/usr/local/emhttp/plugins/&plugin;/scripts/rc.enhanced.log
 </INLINE>
 </FILE>
 
@@ -167,10 +188,16 @@ OTHER_CLR="SeaGreen"
 
 <!--
 The 'post-install' script.
-
 -->
 <FILE Run="/bin/bash">
 <INLINE>
+#
+# Start rsyslog filtering.
+#
+echo "Enabling Syslog Filter..."
+logger "Enabling Syslog filter..." -t"enhanced.log"
+/usr/local/emhttp/plugins/&plugin;/scripts/rc.enhanced.log
+
 echo ""
 echo "-----------------------------------------------------------"
 echo " Plugin &name; is installed."
@@ -186,17 +213,25 @@ The 'remove' script.
 -->
 <FILE Run="/bin/bash" Method="remove">
 <INLINE>
+#
 # Remove rsyslog filtering.
+#
 rm -rf /etc/rsyslog.d/02-blocklist-extra.conf
 
+#
 # Restart rsyslog
+#
 echo "Restarting rsyslog..."
 /etc/rc.d/rc.rsyslogd restart >/dev/null
 
+#
 # Remove the enhanced log 'bundle' so it will be downloaded if re-installed.
+#
 rm -rf /boot/config/plugins/&plugin;/&name;-&version;.tgz
 
+#
 # Remove all plugin files.
+#
 rm -rf /usr/local/emhttp/plugins/&plugin; 2>/dev/null
 
 echo ""

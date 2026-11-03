@@ -4,6 +4,14 @@ The **Next** series continues development of the plugin by the original author a
 
 Development of the plugin will continue with ongoing fixes, enhancements, and maintenance improvements.
 
+## 2026.11.03
+
+### Fixes
+- Validate the plugin bundle before installation.
+- Report bundle extraction failures.
+- Preserve the current plugin bundle when removing older bundles.
+- Apply syslog filtering after configuration files are created.
+
 ## 2026.07.26
 
 ### New Feature
