@@ -3,13 +3,13 @@
 <!ENTITY name       "enhanced.log-next">
 <!ENTITY plugin      "enhanced.log">
 <!ENTITY author     "dlandon">
-<!ENTITY version	"2026.11.03">
+<!ENTITY version	"2026.11.17">
 <!ENTITY launch		"Tools/EnhancedSyslog">
 <!ENTITY gitURL		"https://raw.githubusercontent.com/&author;/&name;/master">
 <!ENTITY tgzURL		"https://raw.githubusercontent.com/&author;/&name;/v&version;">
 <!ENTITY pluginURL	"&gitURL;/&name;.plg">
 <!ENTITY supportURL	"https://github.com/dlandon/&name;/discussions">
-<!ENTITY MD5		"7a62c69ac154163cea26a900988ec1f0">
+<!ENTITY MD5		"8fd1ff84f677a2b5ed4791152b94f5f3">
 ]>
 
 <PLUGIN	name="&plugin;"
@@ -24,6 +24,14 @@
 <CHANGES>
 ##&name;
 ###&version;
+- Fix: Validate configured highlight colors to prevent CSS injection.
+- Fix: Improve regular expression handling with processing limits and safer pattern delimiters.
+- Fix: Improve syslog highlighting priority so errors take precedence over minor issues.
+- Fix: Validate rsyslog configuration before restarting the service, with rollback on failure.
+- Fix: Improve configuration backup validation and rollback error reporting.
+- Fix: Improve JavaScript encoding of syslog download filenames.
+
+###2026.11.03
 - Fix: Validate the plugin bundle before changing installed files.
 - Fix: Report bundle extraction failures and abort installation.
 - Fix: Improve old bundle cleanup to preserve the exact current installation bundle.

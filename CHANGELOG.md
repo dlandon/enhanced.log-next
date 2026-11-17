@@ -4,6 +4,16 @@ The **Next** series continues development of the plugin by the original author a
 
 Development of the plugin will continue with ongoing fixes, enhancements, and maintenance improvements.
 
+## 2026.11.17
+
+### Fixes
+- Validate configured highlight colors to prevent CSS injection.
+- Improve regular expression handling with processing limits and safer pattern delimiters.
+- Prioritize error highlighting over less severe syslog messages.
+- Validate the rsyslog configuration before restarting the service and roll back on failure.
+- Improve configuration backup validation and rollback error reporting.
+- Improve JavaScript encoding of syslog download filenames.
+
 ## 2026.11.03
 
 ### Fixes
